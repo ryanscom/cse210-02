@@ -21,7 +21,7 @@ If a player decides not to play again the game is over.
 The project files and folders are organized as follows:
 ```
 root                    (project root folder)
-+-- deck                (source code for game)
++-- hilo                (source code for game)
   +-- game              (specific classes)
   +-- __main__.py       (program entry point)
 +-- README.md           (general info)
