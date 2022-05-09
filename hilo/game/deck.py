@@ -16,17 +16,27 @@ class Deck:
             self (Deck): An instance of Deck.
         """
         self.value = 0
+        self.suit = 0
     
-
     def draw(self):
         """Generates a new random value and calculates the points.
         
         Args:
             self (Deck): An instance of Deck.
         """
+        suits = ['\u2666', '\u2665', '\u2663', '\u2660']
+
+        self.suit = random.choice(suits)
         self.value = random.randint(1, 13)
 
-        
-        
 
-        
+
+""" Notes on how to access a variable within a class method
+
+deck = Deck() # make an instance of Deck class
+deck.draw() # run the method in that instance
+card = deck.value # get the value of the variable wanted in the method 
+
+print(card) 
+
+"""
