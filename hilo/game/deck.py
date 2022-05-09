@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import random
 
 class Deck:
@@ -40,3 +41,14 @@ card = deck.value # get the value of the variable wanted in the method
 print(card) 
 
 """
+=======
+
+
+class Deck:
+    """ Holds the card deck.  Deck = [cards 1 through 13]"""
+
+    """contructor here"""
+
+    def draw():
+        """draws a card from the deck.  value of 1-13 """
+>>>>>>> debfaf85fae40d3fe2fc11c5145a3e9e8f1acbb1
