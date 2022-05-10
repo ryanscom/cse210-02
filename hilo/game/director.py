@@ -1,3 +1,4 @@
+
 from game.deck import Deck
 
 
@@ -114,6 +115,8 @@ class Director():
             print(f"You gained 100 points!")
         if self.right_wrong == "w":
             print(f"You lost 75 points!")
+        if self.score <= 0:
+            print("Sorry, you ran out of points. You lose. ")
 
         print(f"You now have a total score of {self.score} points")
         
