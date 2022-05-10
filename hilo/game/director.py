@@ -21,7 +21,7 @@ class Director():
         """
 
         self.is_playing = True
-        self.score = 75
+        self.score = 300
         self.right_wrong = "x"
         self.current_card = 0
         self.next_card = -1
@@ -142,5 +142,5 @@ class Director():
         print(f"Game Over!")
         print(f"Your score is: {self.score}")
         print()
-        
+
         self.is_playing = False
