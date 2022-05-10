@@ -21,7 +21,7 @@ class Director():
         """
 
         self.is_playing = True
-        self.score = 300
+        self.score = 75
         self.right_wrong = "x"
         self.current_card = 0
         self.next_card = -1
@@ -54,8 +54,9 @@ class Director():
         if pick_card == "n":
             self.print_ending_score()
 
-        if pick_card == "y":
-            if self.current_card != self.next_card:
+        elif pick_card == "y":
+            
+            if self.next_card == -1:
                 deck = Deck()
                 deck.draw()
                 card = deck.value
@@ -74,7 +75,7 @@ class Director():
             suit = deck.suit
             self.next_card = card
             self.next_suit = suit
-        
+
 
     def do_updates(self):
         """Updates the player's score.
@@ -90,18 +91,22 @@ class Director():
                 self.score -= 75
                 self.right_wrong = "w"
                 
-            if self.next_card < self.current_card:
+            elif self.next_card < self.current_card:
                 self.score += 100
                 self.right_wrong = "r"
+            else:
+                self.right_wrong = "t"
 
-        if self.guess.lower() == "h":
+        elif self.guess.lower() == "h":
             if self.next_card < self.current_card:
                 self.score -= 75
                 self.right_wrong = "w"
 
-            if self.next_card > self.current_card:
+            elif self.next_card > self.current_card:
                 self.score += 100
                 self.right_wrong = "r"
+            else:
+                self.right_wrong = "t"
         
 
     def do_outputs(self):
@@ -118,19 +123,24 @@ class Director():
 
         if self.right_wrong == "r":
             print(f"You gained 100 points!")
-        if self.right_wrong == "w":
+        elif self.right_wrong == "w":
             print(f"You lost 75 points!")
+        elif self.right_wrong == "t":
+            print("You got the same number, no points!")
 
         print(f"You now have a total score of {self.score} points")
         
         self.current_card = self.next_card
         self.current_suit = self.next_suit
-
-        self.is_playing == (self.score > 0)
+        
+        if self.score < 1:
+            self.print_ending_score() 
         
     def print_ending_score(self):
         
         print()
         print(f"Game Over!")
         print(f"Your score is: {self.score}")
+        print()
+        
         self.is_playing = False
