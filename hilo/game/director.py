@@ -9,8 +9,13 @@ class Director():
 
     Attributes:
         is_playing (boolean): Whether or not the game is being played.
-        score (int): The score for one round of play.
-        total_score (int): The score for the entire game.
+        score (int): The current score for one round of play.
+        right_wrong (str): Check if guessed value was correct and used to print related message
+        current_card (int): holds the current card number
+        next_card (int): holds the next cards number
+        current_suit (str): holds the current cards suit icon
+        next_suit (str): holds the next cards suit icon
+        guess (str): hold "h" or "l" depending on user input
     """
 
     def __init__(self):
@@ -43,12 +48,16 @@ class Director():
 
     def get_inputs(self):
         """Ask the user if they want to pick a card.
+        If yes: draws a new card from deck class.
+        Ask the user to guess High or Low (h/l).
+        Draws the next card from deck class.
 
         Args:
             self (Director): An instance of Director.
         """
 
-        pick_card = input("pick card? [y/n] ")
+        print()
+        pick_card = input("pick a card? [y/n] ")
         self.is_playing = (pick_card == "y")
 
         if pick_card == "n":
@@ -56,11 +65,11 @@ class Director():
 
         if pick_card == "y":
             if self.current_card != self.next_card:
-                deck = Deck()
-                deck.draw()
-                card = deck.value
-                suit = deck.suit
-                self.current_card = card
+                deck = Deck() # create an instance of the deck class
+                deck.draw() # run the .draw method in the instance 
+                card = deck.value # retrieve the variable .value from the draw method
+                suit = deck.suit # retrieve the variable .suit from the draw method
+                self.current_card = card # update the global value for self.current_card in the director class
                 self.current_suit = suit
 
             print(f"The card is: {self.current_card}{self.current_suit}")
@@ -78,6 +87,7 @@ class Director():
 
     def do_updates(self):
         """Updates the player's score.
+        Updates if the user guessed right or wrong with the right_wrong class variable.
 
         Args:
             self (Director): An instance of Director.
@@ -105,30 +115,36 @@ class Director():
         
 
     def do_outputs(self):
-        """Displays the card and the score. Also asks the player if they want to pick another card. 
-
+        """Displays the card and the score. Also makes ending card be the begining card for the next interation
+        
         Args:
             self (Director): An instance of Director.
         """
         if not self.is_playing:
             return
         
-
-        print(f"The next card was: {self.next_card}{self.next_suit}")
+        print()
+        print(f"The next card is: {self.next_card}{self.next_suit}")
 
         if self.right_wrong == "r":
             print(f"You gained 100 points!")
         if self.right_wrong == "w":
             print(f"You lost 75 points!")
 
+        print()
         print(f"You now have a total score of {self.score} points")
         
-        self.current_card = self.next_card
-        self.current_suit = self.next_suit
+        self.current_card = self.next_card # change current_card value to the next_card value
+        self.current_suit = self.next_suit # change current_suit value to the next_suit value
 
         self.is_playing == (self.score > 0)
         
     def print_ending_score(self):
+        """Displays the players ending score and ends the game
+        
+        Args:
+            self (Director): An instance of Director.
+        """
         
         print()
         print(f"Game Over!")

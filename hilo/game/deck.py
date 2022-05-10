@@ -31,7 +31,7 @@ class Deck:
 
 
 
-""" Notes on how to access a variable within a class method
+""" Notes on how to access a variable within a method
 
 deck = Deck() # make an instance of Deck class
 deck.draw() # run the method in that instance
