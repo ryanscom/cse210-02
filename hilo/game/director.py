@@ -83,7 +83,7 @@ class Director():
             suit = deck.suit
             self.next_card = card
             self.next_suit = suit
-        
+
 
     def do_updates(self):
         """Updates the player's score.
@@ -100,18 +100,22 @@ class Director():
                 self.score -= 75
                 self.right_wrong = "w"
                 
-            if self.next_card < self.current_card:
+            elif self.next_card < self.current_card:
                 self.score += 100
                 self.right_wrong = "r"
+            else:
+                self.right_wrong = "t"
 
-        if self.guess.lower() == "h":
+        elif self.guess.lower() == "h":
             if self.next_card < self.current_card:
                 self.score -= 75
                 self.right_wrong = "w"
 
-            if self.next_card > self.current_card:
+            elif self.next_card > self.current_card:
                 self.score += 100
                 self.right_wrong = "r"
+            else:
+                self.right_wrong = "t"
         
 
     def do_outputs(self):
@@ -128,8 +132,10 @@ class Director():
 
         if self.right_wrong == "r":
             print(f"You gained 100 points!")
-        if self.right_wrong == "w":
+        elif self.right_wrong == "w":
             print(f"You lost 75 points!")
+        elif self.right_wrong == "t":
+            print("You got the same number, no points!")
 
         print()
         print(f"You now have a total score of {self.score} points")
@@ -149,4 +155,6 @@ class Director():
         print()
         print(f"Game Over!")
         print(f"Your score is: {self.score}")
+        print()
+
         self.is_playing = False
