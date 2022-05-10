@@ -65,6 +65,7 @@ class Director():
 
             print(f"The card is: {self.current_card}{self.current_suit}")
 
+
             self.guess = input(f"Higher or lower? [h/l] ")
 
             deck = Deck()
