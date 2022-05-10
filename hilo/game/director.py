@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-from game.deck import Deck
-=======
-<<<<<<< HEAD
+
 from game.deck import Deck
 
 
@@ -54,24 +51,28 @@ class Director():
         pick_card = input("pick card? [y/n] ")
         self.is_playing = (pick_card == "y")
 
-        if self.current_card != self.next_card:
+        if pick_card == "n":
+            self.print_ending_score()
+
+        if pick_card == "y":
+            if self.current_card != self.next_card:
+                deck = Deck()
+                deck.draw()
+                card = deck.value
+                suit = deck.suit
+                self.current_card = card
+                self.current_suit = suit
+
+            print(f"The card is: {self.current_card}{self.current_suit}")
+
+            self.guess = input(f"Higher or lower? [h/l] ")
+
             deck = Deck()
             deck.draw()
             card = deck.value
             suit = deck.suit
-            self.current_card = card
-            self.current_suit = suit
-
-        print(f"The card is: {self.current_card}{self.current_suit}")
-
-        self.guess = input(f"Higher or lower? [h/l] ")
-
-        deck = Deck()
-        deck.draw()
-        card = deck.value
-        suit = deck.suit
-        self.next_card = card
-        self.next_suit = suit
+            self.next_card = card
+            self.next_suit = suit
         
 
     def do_updates(self):
@@ -126,3 +127,9 @@ class Director():
 
         self.is_playing == (self.score > 0)
         
+    def print_ending_score(self):
+        
+        print()
+        print(f"Game Over!")
+        print(f"Your score is: {self.score}")
+        self.is_playing = False
