@@ -40,7 +40,3 @@ card = deck.value # get the value of the variable wanted in the method
 print(card) 
 
 """
-<<<<<<< HEAD
-=======
-
->>>>>>> 01b3a209438993cd6a9e777984277be8ea1b385a
