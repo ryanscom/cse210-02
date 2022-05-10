@@ -7,6 +7,7 @@ class Deck:
    
     Attributes:
         value (int): number of the random card pulled from the deck
+        suit (str): string value for the suit icon 
     """
 
     def __init__(self):

@@ -12,9 +12,9 @@ class Director():
         score (int): The current score for one round of play.
         right_wrong (str): Check if guessed value was correct and used to print related message
         current_card (int): holds the current card number
-        next_card (int): holds the next cards number
-        current_suit (str): holds the current cards suit icon
-        next_suit (str): holds the next cards suit icon
+        next_card (int): holds the next card number
+        current_suit (str): holds the current card suit icon
+        next_suit (str): holds the next card suit icon
         guess (str): hold "h" or "l" depending on user input
     """
 
