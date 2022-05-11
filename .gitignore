@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+hilo/game/__pycache__/deck.cpython-310.pyc
+hilo/game/__pycache__/director.cpython-310.pyc
+hilo/game/__pycache__/director.cpython-310.pyc
