@@ -14,4 +14,3 @@ class Introduction:
         print(f"Welcome {self.first_name} {self.last_name}")
         print(f"Let's play!")
         print("The player starts the game with 300 points. Individual cards are represented as a number from 1 to 13.")
-        print()
