@@ -143,7 +143,7 @@ class Director():
         self.current_card = self.next_card # change current_card value to the next_card value
         self.current_suit = self.next_suit # change current_suit value to the next_suit value
 
-        self.is_playing == (self.score > 0)
+        self.is_playing = (self.score > 0)
         
     def print_ending_score(self):
         """Displays the players ending score and ends the game
