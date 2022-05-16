@@ -1,6 +1,6 @@
 
 from game.deck import Deck
-
+from game.high_score import High_score
 
 class Director():
     """A person who directs the game. 
@@ -15,7 +15,10 @@ class Director():
         next_card (int): holds the next card number
         current_suit (str): holds the current card suit icon
         next_suit (str): holds the next card suit icon
-        guess (str): hold "h" or "l" depending on user input
+        guess (str): holds "h" or "l" depending on user input
+        first_name (str): holds first name of the player
+        last_name (str): holds last name of the player
+        high_score_player_name (str): hold the high score player's name
     """
 
     def __init__(self):
@@ -33,6 +36,9 @@ class Director():
         self.current_suit = "a"
         self.next_suit = "b"
         self.guess = ""
+        self.first_name = ""
+        self.last_name = ""
+        self.high_score_player_name = ""
     
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -55,6 +61,28 @@ class Director():
         Args:
             self (Director): An instance of Director.
         """
+        if self.first_name == "" or self.last_name == "":
+            
+            print()
+            self.first_name = input("Enter your first name: ")
+            self.last_name = input("Enter your last name: ")
+            print()
+            print(f"Welcome {self.first_name} {self.last_name}")
+            print()
+            print(f"Let's play!")
+            print("The player starts the game with 300 points. Individual cards are represented as a number from 1 to 13.")
+            print("If the player's points equal 0 or lower the game ends ")
+
+            # getting the high score 
+            h_score = High_score(self.score, self.first_name, self.last_name) # makes an instance of High_score class 
+            h_score.retrieve_high_score() # runs the retrieve_high_score method
+            self.high_score = h_score.high_score # updating director high_score variable with the highscore from High_score class
+            self.high_score_player_name = h_score.first_name + " " + h_score.last_name # Updates high score player's name
+
+            print()
+            print(f"The current player to beat is {self.high_score_player_name} with a high_score of: {str(self.high_score)}")
+        else:
+            None
 
         print()
         pick_card = input("pick a card? [y/n] ")
@@ -135,13 +163,16 @@ class Director():
         elif self.right_wrong == "w":
             print(f"You lost 75 points!")
         elif self.right_wrong == "t":
-            print("You got the same number, no points!")
+            print(f"{self.first_name} you guessed the same number, no points!")
 
         print()
         print(f"You now have a total score of {self.score} points")
         
         self.current_card = self.next_card # change current_card value to the next_card value
         self.current_suit = self.next_suit # change current_suit value to the next_suit value
+
+        if self.score <= 0:
+            self.print_ending_score()
 
         self.is_playing = (self.score > 0)
         
@@ -152,9 +183,22 @@ class Director():
             self (Director): An instance of Director.
         """
         
+        # Getting the high score
+        h_score = High_score(self.score, self.first_name, self.last_name)
+        h_score.compare_and_store()
+        self.high_score = h_score.high_score
+        self.high_score_player_name = h_score.first_name + " " + h_score.last_name
+
+        if self.score <= 0:
+            print()
+            print(f"Sorry {self.first_name}, you lost. ")
         print()
-        print(f"Game Over!")
-        print(f"Your score is: {self.score}")
+
+        if self.score > 0:
+            print(f"Game Over!")
+
+        print(f"The current player to beat is {self.high_score_player_name} with a high_score of: {str(self.high_score)}")
+        print(f"{self.first_name} your score is: {self.score}")
         print()
 
         self.is_playing = False
